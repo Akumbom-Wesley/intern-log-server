@@ -11,7 +11,7 @@ services:
     startCommand: gunicorn config.wsgi:application --workers 2
     envVars:
       - key: DJANGO_SETTINGS_MODULE
-        value: intern_log.config.settings.prod
+        value: config.settings.prod
       - key: SECRET_KEY
         value: ml!&x@b*gs%0&nr48y*hu-hikpsw2k$o--s8rc&b4%ytyn7%d3
       - key: PYTHON_VERSION
