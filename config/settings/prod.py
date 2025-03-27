@@ -33,3 +33,13 @@ ALLOWED_HOSTS = config(
     default='intern-log.onrender.com',
     cast=Csv()
 )
+
+# Add to prod.py
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Ensure Django can find drf-yasg static files
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
