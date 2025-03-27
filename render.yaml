@@ -6,7 +6,7 @@ services:
     plan: free
     buildCommand: |
       pip install -r requirements/requirements.txt
-      python manage.py collectstatic --noinput
+      python manage.py collectstatic --noinput --clear
       python manage.py migrate --noinput
     startCommand: gunicorn config.wsgi:application --workers 2
     envVars:

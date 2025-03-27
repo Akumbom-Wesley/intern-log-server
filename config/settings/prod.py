@@ -39,20 +39,39 @@ ALLOWED_HOSTS = config(
     cast=Csv()
 )
 
-# Static files configuration
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# For drf-yasg
-SWAGGER_SETTINGS = {
-    'SECURITY_DEFINITIONS': {
-        'Bearer': {
-            'type': 'apiKey',
-            'name': 'Authorization',
-            'in': 'header'
-        }
-    },
-    'USE_SESSION_AUTH': False,
-    'VALIDATOR_URL': None,
-}
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+
+# Production-specific middleware (e.g., for logging or security)
+MIDDLEWARE += [
+    # 'custom.middleware.SecurityHeadersMiddleware',
+]
+
+# Debug toolbar only in development
+if DEBUG:
+    MIDDLEWARE += [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    ]
+
+    # Static files configuration
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+    # For drf-yasg
+    SWAGGER_SETTINGS = {
+        'SECURITY_DEFINITIONS': {
+            'Bearer': {
+                'type': 'apiKey',
+                'name': 'Authorization',
+                'in': 'header'
+            }
+        },
+        'USE_SESSION_AUTH': False,
+        'VALIDATOR_URL': None,
+    }
+
+    # Add this to force Django to find drf-yasg static files
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+    ]
