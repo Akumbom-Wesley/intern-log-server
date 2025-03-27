@@ -43,10 +43,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     #swagger
-    path('', RedirectView.as_view(url='/swagger/', permanent=True)),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
 
+# Serve static files in production
 if not settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    from django.views.static import serve
+    urlpatterns += [
+        path('static/<path:path>', serve, {'document_root': settings.STATIC_ROOT}),
+    ]
