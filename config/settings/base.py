@@ -49,6 +49,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ] + LOCAL_APPS + THIRD_PARTY_APPS
 
+# SWAGGER SETTINGS
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    },
+    'USE_SESSION_AUTH': False,
+}
+
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [

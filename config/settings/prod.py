@@ -26,3 +26,7 @@ CSRF_COOKIE_SECURE = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 SECRET_KEY = config('SECRET_KEY')
+
+# Only enable Swagger in development
+if DEBUG:
+    SWAGGER_SETTINGS['VALIDATOR_URL'] = None  #
