@@ -30,3 +30,11 @@ SECRET_KEY = config('SECRET_KEY')
 # Only enable Swagger in development
 if DEBUG:
     SWAGGER_SETTINGS['VALIDATOR_URL'] = None  #
+
+
+# Keep strict control in production
+ALLOWED_HOSTS = config(
+    'ALLOWED_HOSTS',
+    default='intern-log.onrender.com',
+    cast=Csv()
+)

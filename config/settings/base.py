@@ -12,7 +12,7 @@ SECRET_KEY = config("SECRET_KEY")
 
 # General settings
 DEBUG = config("DEBUG", default=False, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+
 
 # Local apps (15 apps in your apps folder)
 LOCAL_APPS = [

@@ -27,11 +27,11 @@ from django.urls import path
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="DuePay API Documentation",
+        title="Intern-Log API Documentation",
         default_version='v1',
-        description="API documentation for the DuePay Application",
-        terms_of_service="https://www.nerdtekc.org/policies/intern/terms/",
-        contact=openapi.Contact(email="nerdtekc.org@gmail.com"),
+        description="API documentation for the Intern-Log Application",
+        terms_of_service="",
+        contact=openapi.Contact(email="akumbomwesley802@gmail.com"),
         license=openapi.License(name="BSD License"),
     ),
     public=True,
