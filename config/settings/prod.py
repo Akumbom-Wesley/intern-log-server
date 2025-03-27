@@ -39,3 +39,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 WHITENOISE_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+Path(STATIC_ROOT).mkdir(parents=True, exist_ok=True)
