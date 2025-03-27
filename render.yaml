@@ -8,7 +8,7 @@ services:
       pip install -r requirements/requirements.txt
       python manage.py collectstatic --noinput
       python manage.py migrate --noinput
-    startCommand: gunicorn intern_log.config.wsgi:application --workers 2
+    startCommand: gunicorn config.wsgi:application --workers 2
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: intern_log.config.settings.prod
