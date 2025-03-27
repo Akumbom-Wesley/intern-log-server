@@ -16,40 +16,15 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.generic import RedirectView
-from drf_yasg import openapi
-from drf_yasg.views import get_schema_view
-from rest_framework import permissions
-
-import config
 from django.contrib import admin
 from django.urls import path
 
-
-schema_view = get_schema_view(
-    openapi.Info(
-        title="Intern-Log API Documentation",
-        default_version='v1',
-        description="API documentation for the Intern-Log Application",
-        terms_of_service="",
-        contact=openapi.Contact(email="akumbomwesley802@gmail.com"),
-        license=openapi.License(name="BSD License"),
-    ),
-    public=True,
-    permission_classes=[permissions.AllowAny]
-)
+from .swagger import urlpatterns as swagger_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+] + swagger_urls
 
-    #swagger
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-]
 
-# Serve static files in production
-if not settings.DEBUG:
-    from django.views.static import serve
-    urlpatterns += [
-        path('static/<path:path>', serve, {'document_root': settings.STATIC_ROOT}),
-    ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

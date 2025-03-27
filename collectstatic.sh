@@ -1,7 +1,12 @@
-echo "Creating staticfiles directory..."
-mkdir -p staticfiles
+#!/usr/bin/env bash
+# Exit on error
+set -o errexit
 
-echo "Collecting static files..."
-python manage.py collectstatic --noinput --clear
+# Modify this line as needed for your package manager (pip, poetry, etc.)
+pip install -r requirements/requirements.txt
 
-echo "Static files collection complete."
+# Convert static asset files
+python manage.py collectstatic --no-input
+
+# Apply any outstanding database migrations
+python manage.py migrate
