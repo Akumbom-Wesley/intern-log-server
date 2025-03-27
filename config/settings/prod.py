@@ -3,7 +3,7 @@ import os
 import dj_database_url
 
 DEBUG = False
-ALLOWED_HOSTS = ["your-app-name.onrender.com"]
+ALLOWED_HOSTS = ["intern-log.onrender.com"]
 
 # Render PostgreSQL
 DATABASES = {
