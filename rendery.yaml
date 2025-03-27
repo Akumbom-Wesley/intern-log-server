@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: intern-log
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: |
+      pip install -r requirements/requirements.txt
+      python manage.py collectstatic --noinput
+      python manage.py migrate --noinput
+    startCommand: gunicorn intern-log.config.wsgi:application --workers 2
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: intern-log.settings.prod
+      - key: SECRET_KEY
+        value: ml!&x@b*gs%0&nr48y*hu-hikpsw2k$o--s8rc&b4%ytyn7%d3
+      - key: PYTHON_VERSION
+        value: 3.12.4
+      - key: DISABLE_COLLECTSTATIC
+        value: 0
+      - key: PYTHONUNBUFFERED
+        value: 1
+      - key: DEBUG
+        value: 0
+
+  - type: postgres
+    name: intern-log-db
+    region: oregon
+    plan: free
+    databaseName: internlog_prod
+    user: internlog_admin
